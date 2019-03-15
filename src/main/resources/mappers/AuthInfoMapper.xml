@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.market.basecode.mapper.AuthInfoMapper">
+    <resultMap id="BaseResultMap" type="com.springboot.market.basecode.entity.AuthInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+    <resultMap id="UserResultMap" type="hashMap">
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from auth_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.springboot.market.basecode.entity.AuthInfo"
+            useGeneratedKeys="true">
+    insert into auth_info (user_id, account, `password`
+      )
+    values (#{userId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.springboot.market.basecode.entity.AuthInfo">
+    update auth_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      account = #{account,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, account, `password`
+    from auth_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, account, `password`
+    from auth_info
+  </select>
+    <select id="login" resultMap="UserResultMap">
+    select  user_id
+    from auth_info
+    where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: dev
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: src/main/java
+      exclude: flow/**
+
+server:
+  port: 8888
+
+
+logging:
+  config: classpath:log4j2.xml
+
+
+mybatis:
+  typeAliasesPackage: com.springboot.market.basecode.entity
+  mapperLocations: classpath:mappers/*.xml
